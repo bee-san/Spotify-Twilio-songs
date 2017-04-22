@@ -11,7 +11,7 @@ username='ryankrage77'
 user_id='21gwsd5wok363feqdz27rgu2q'
 playlist='7rDiVWYOh2abdvBB6Zcxva'
 
-scope = 'playlist-modify-private'
+scope = 'playlist-modify-private user-library-read user-library-modify playlist-modify-public playlist-read-collaborative playlist-read-private'
 token = util.prompt_for_user_token(client_id, scope)
 
 #ccm = SpotifyClientCredentials()
@@ -22,7 +22,6 @@ sp = spotipy.Spotify(auth=token)
 
 def req():
     if token:
-        #sp = spotipy.Spotify(auth=token)
         util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
         sp.trace = True
         sp.trace_out = True
@@ -42,24 +41,26 @@ def req():
                 main()
 
         if answer1 == 'set':
-            print("args: add, rem, override")
+            print("args: add, rem, pos")
             answer2 = input()
             if answer2 == 'add':
                 print("track id?")
                 track_id = input()
-                sp.user_playlist_add_tracks(user_id, playlist, track_id)
+                track_id2 = [ track_id ]
+                sp.user_playlist_add_tracks(user_id, playlist, track_id2)
             if answer2 == 'rem':
                 print("please note that this will remove all occurences of the track!")
                 print("track id?")
                 track_id = input()
-                sp.user_playlist_remove_all_occurences(user_id, playlist, track_id)
-            if answer2 == 'override':
-                print("please note that this will override the track at this position!")
+                track_id2 = [ track_id ]
+                sp.user_playlist_remove_all_occurrences_of_tracks(user_id, playlist, track_id2)
+            if answer2 == 'pos':
                 print("track id?")
                 track_id = input()
+                track_id2 = [ track_id ]
                 print("position?")
                 pos = input()
-                sp.user_playlist_add_tracks(user_id, playlist, track_id, pos)
+                sp.user_playlist_add_tracks(user_id, playlist, track_id2, pos)
             else:
                 print("reloading the program")
                 main()
