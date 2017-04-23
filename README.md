@@ -6,4 +6,4 @@ This is a hackathon project made by [@BrandonSkerritt51](https://github.com/Bran
 * Get user's song requests via text.
 * Possibly allow users to confirm their request.
 * Send the request that they made via Twilio to the Spotify code in order to enable the addition of code to the playlist.
-* Possibly use Heroku to store the application.
+* Possibly use [Heroku](https://heroku.com/) to store the application.
